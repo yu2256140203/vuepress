@@ -98,20 +98,15 @@ module.exports = function (src) {
     }
   })
 
+  const parseSlots = require('./parseSlots')
+  const slotsToCode = require('./slotsToCode')
+
+  const parsedSlots = parseSlots(html)
+
   const res = (
     `<template>\n` +
-      `<ContentSlotsDistributor :slot-key="slotKey">${html}</ContentSlotsDistributor>\n` +
+      `<div class="content">${slotsToCode(parsedSlots)}</div>` +
     `</template>\n` +
-    `<script>
-      export default { 
-         props: ['slot-key'], 
-         mounted() {
-           this.$nextTick(function () {
-             this.$vuepress.$emit('AsyncMarkdownContentMounted', this.slotKey)
-           })
-         } 
-      }
-    </script>` +
     (hoistedTags || []).join('\n') +
     `\n${dataBlockString}\n`
   )

@@ -12,7 +12,6 @@ import VuePress from './plugins/VuePress'
 // built-in components
 import LoadableContent from './components/Content.vue'
 import Content from './components/Content.js'
-import ContentSlotsDistributor from './components/ContentSlotsDistributor'
 import OutboundLink from './components/OutboundLink.vue'
 import ClientOnly from './components/ClientOnly'
 
@@ -42,7 +41,6 @@ if (CONTENT_LOADING) {
   Vue.component('Content', Content)
 }
 
-Vue.component('ContentSlotsDistributor', ContentSlotsDistributor)
 Vue.component('OutboundLink', OutboundLink)
 // component for client-only content
 Vue.component('ClientOnly', ClientOnly)
