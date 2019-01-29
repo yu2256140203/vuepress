@@ -53,8 +53,11 @@ module.exports = function (src) {
       JSON.stringify(cachedData.frontmatterData) !== JSON.stringify(frontmatter.data) ||
       headersChanged(cachedData.headers, headers)
     )) {
+      console.log('frontmatter changed')
       // frontmatter changed... need to do a full reload
-      module.exports.frontmatterEmitter.emit('update')
+      module.exports.frontmatterEmitter.emit('update', {
+        file
+      })
     }
 
     devCache.set(file, {

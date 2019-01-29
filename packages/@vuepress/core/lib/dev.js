@@ -23,7 +23,6 @@ async function prepareServer (sourceDir, cliOptions = {}, context) {
   const DevLogPlugin = require('./webpack/DevLogPlugin')
   const createClientConfig = require('./webpack/createClientConfig')
   const { applyUserWebpackConfig } = require('./util/index')
-  const { frontmatterEmitter } = require('@vuepress/markdown-loader')
 
   const ctx = context || await prepare(sourceDir, cliOptions, false /* isProd */)
 
@@ -60,9 +59,6 @@ async function prepareServer (sourceDir, cliOptions = {}, context) {
     ignoreInitial: true
   })
   configWatcher.on('change', () => update('config change'))
-
-  // also listen for frontmatter changes from markdown files
-  frontmatterEmitter.on('update', () => update('frontmatter or headers change'))
 
   // resolve webpack config
   let config = createClientConfig(ctx)

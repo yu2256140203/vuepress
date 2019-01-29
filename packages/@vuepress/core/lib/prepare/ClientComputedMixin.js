@@ -29,14 +29,16 @@ function findPageForPath (pages, path) {
  * @returns {ClientComputedMixin}
  */
 
-module.exports = siteData => {
+module.exports = (siteData, isClient) => {
   return class ClientComputedMixin {
     setPage (page) {
       this.__page = page
     }
 
     get $site () {
-      return siteData
+      return isClient
+        ? siteData.siteData
+        : siteData
     }
 
     get $themeConfig () {

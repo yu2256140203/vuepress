@@ -17,6 +17,7 @@ const {
 const Page = require('./Page')
 const ClientComputedMixin = require('./ClientComputedMixin')
 const PluginAPI = require('../plugin-api/index')
+const { frontmatterEmitter } = require('@vuepress/markdown-loader')
 
 /**
  * Expose AppContext.
@@ -55,6 +56,25 @@ module.exports = class AppContext {
     this.vuepressDir = path.resolve(sourceDir, '.vuepress')
   }
 
+  async handlePageHotUpdate () {
+    await this.writeTemp(
+      'internal/hot-update.js',
+      `export default {}`
+    )
+    frontmatterEmitter.on('update', async ({ file }) => {
+      const target = this.pages.find(page => page._filePath === file)
+      await this.processPage(target)
+      await this.writeTemp(
+        'internal/hot-update.js',
+        `export default ${JSON.stringify(target.toJson())}`
+      )
+      await this.writeTemp(
+        'internal/siteData.js',
+        `export const siteData = ${JSON.stringify(this.getSiteData(), null, 2)}`
+      )
+    })
+  }
+
   /**
    * Resolve user config and initialize.
    *
@@ -91,6 +111,7 @@ module.exports = class AppContext {
    */
 
   async process () {
+    await this.handlePageHotUpdate()
     this.resolveConfigAndInitialize()
     this.resolveCacheLoaderOptions()
     this.normalizeHeadTagUrls()
@@ -293,12 +314,16 @@ module.exports = class AppContext {
   async addPage (options) {
     options.permalinkPattern = this.siteConfig.permalink
     const page = new Page(options, this)
+    await this.processPage(page)
+    this.pages.push(page)
+  }
+
+  async processPage (page) {
     await page.process({
       markdown: this.markdown,
       computed: new this.ClientComputedMixinConstructor(),
       enhancers: this.pluginAPI.options.extendPageData.items
     })
-    this.pages.push(page)
   }
 
   /**
@@ -373,12 +398,16 @@ function createTemp (tempPath) {
 
   async function writeTemp (file, content) {
     const destPath = path.join(tempPath, file)
+    console.log(destPath)
     await fs.ensureDir(path.parse(destPath).dir)
     // cache write to avoid hitting the dist if it didn't change
     const cached = tempCache.get(file)
     if (cached !== content) {
+      console.log('内容变了！！！')
       await fs.writeFile(destPath, content)
       tempCache.set(file, content)
+    } else {
+      console.log('内容未变！！！')
     }
     return destPath
   }

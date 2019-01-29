@@ -1,9 +1,10 @@
-/* global VUEPRESS_TEMP_PATH */
 import Vue from 'vue'
 import Router from 'vue-router'
 import dataMixin from './dataMixin'
+import { findPageByKey } from './util'
 import { routes } from '@internal/routes'
 import { siteData } from '@internal/siteData'
+import hotUpdate from '@internal/hot-update.js'
 import appEnhancers from '@internal/app-enhancers'
 import globalUIComponents from '@internal/global-ui'
 import ClientComputedMixin from '@transform/ClientComputedMixin'
@@ -18,13 +19,34 @@ import ClientOnly from './components/ClientOnly'
 // suggest dev server restart on base change
 if (module.hot) {
   const prevBase = siteData.base
-  module.hot.accept(VUEPRESS_TEMP_PATH + '/internal/siteData.js', () => {
+  module.hot.accept('@internal/siteData', () => {
     if (siteData.base !== prevBase) {
       window.alert(
         `[vuepress] Site base has changed. ` +
         `Please restart dev server to ensure correct asset paths.`
       )
+    } else {
+      // console.log('siteData changed!')
+      // Vue.$vuepress.store.state.siteData = siteData
     }
+  })
+
+  module.hot.accept('@internal/hot-update.js', () => {
+    const ne = hotUpdate
+    const site = Vue.$vuepress.$get('siteData')
+    const ol = findPageByKey(site.pages, ne.key)
+    const pageIndex = site.pages.findIndex(page => page.key === ne.key)
+
+    if (JSON.stringify(ol.headers) !== JSON.stringify(ne.headers)) {
+      console.log('Header Changed!')
+      ol.headers = ne.headers
+      Vue.$vuepress.$emit('changed')
+    } else if (JSON.stringify(ol.frontmatter) !== JSON.stringify(ne.frontmatter)) {
+      console.log('Frontmatter Changed!')
+      ol.frontmatter = ne.frontmatter
+      Vue.$vuepress.$emit('changed')
+    }
+    console.log(site.pages[pageIndex])
   })
 }
 

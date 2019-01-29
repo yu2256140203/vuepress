@@ -59,6 +59,7 @@ export default {
 
   data () {
     return {
+      updateCount: 0,
       isSidebarOpen: false
     }
   },
@@ -91,11 +92,13 @@ export default {
     },
 
     sidebarItems () {
+      console.log('Caculate sidebarItems')
       return resolveSidebarItems(
         this.$page,
         this.$page.regularPath,
         this.$site,
-        this.$localePath
+        this.$localePath,
+        this.updateCount
       )
     },
 
@@ -115,6 +118,10 @@ export default {
   mounted () {
     this.$router.afterEach(() => {
       this.isSidebarOpen = false
+    })
+    this.$vuepress.$on('changed', () => {
+      console.log('updateCount')
+      this.updateCount++
     })
   },
 

@@ -1,5 +1,3 @@
-/* global VUEPRESS_TEMP_PATH */
-
 import Vue from 'vue'
 
 export default function dataMixin (I18n, siteData) {
@@ -7,13 +5,13 @@ export default function dataMixin (I18n, siteData) {
   Vue.$vuepress.$set('siteData', siteData)
 
   if (module.hot) {
-    module.hot.accept(VUEPRESS_TEMP_PATH + '/internal/siteData.js', () => {
+    module.hot.accept('@internal/siteData', () => {
+      console.log('siteData changed 2!')
       prepare(siteData)
-      Vue.$vuepress.$set('siteData', siteData)
     })
   }
 
-  const I18nConstructor = I18n(Vue.$vuepress.$get('siteData'))
+  const I18nConstructor = I18n(Vue.$vuepress.store.state, true)
   const i18n = new I18nConstructor()
   const descriptors = Object.getOwnPropertyDescriptors(Object.getPrototypeOf(i18n))
   const computed = {}

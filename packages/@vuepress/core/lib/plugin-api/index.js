@@ -27,6 +27,15 @@ module.exports = class PluginAPI {
     this.initializeOptions(PLUGIN_OPTION_MAP)
   }
 
+  async executePluginMethod (pluginName, optionName, context) {
+    const option = this.options[optionName]
+    const target = Object.assign({}, option.items.find(({ name }) => name === pluginName))
+    target.value = typeof target.value === 'function'
+      ? await target.value(context)
+      : target.value
+    await option.applyItem(target)
+  }
+
   /**
    * Get enabled plugins
    *
