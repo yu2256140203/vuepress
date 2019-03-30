@@ -1,0 +1,58 @@
+$codeColor ?= #ffffff
+$codeBgColor ?= #282c34
+$languageNameColor ?= rgba(255, 255, 255, 0.4)
+$highlightLinesBgColor ?= rgba(0, 0, 0, 66%)
+$lineNumbersColor ?= rgba(255, 255, 255, 0.3)
+$lineNumbersWrapperWidth ?= 3.5rem
+
+.content div.code-block
+  position relative
+  line-height 1.4rem
+  border-radius 6px
+  background-color $codeBgColor
+
+  .language-name
+    position absolute
+    z-index 3
+    top 0.8em
+    right 1em
+    font-size 0.75rem
+    user-select none
+    color $languageNameColor
+
+  pre
+    padding 1.25rem 1.5rem
+    margin 0.85rem 0
+    overflow auto
+    z-index 10
+    position relative
+    code
+      color $codeColor
+      padding 0
+      background-color transparent
+      border-radius 0
+
+  .highlight-lines, .line-numbers
+    user-select none
+    position absolute
+    padding 1.25rem 0
+    left 0
+
+  .highlight-lines
+    font-size 0.85em
+    width 100%
+    .highlighted
+      z-index 1
+      position relative
+      background-color $highlightLinesBgColor
+
+  .line-numbers
+    font-size 0.85em
+    text-align center
+    z-index 3
+    color $lineNumbersColor
+    width $lineNumbersWrapperWidth
+    border-right 1px solid $highlightLinesBgColor
+
+  &.has-line-numbers pre
+    padding-left $lineNumbersWrapperWidth + 1.5rem

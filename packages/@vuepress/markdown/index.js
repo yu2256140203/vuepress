@@ -6,11 +6,7 @@
 
 const Config = require('markdown-it-chain')
 const LRUCache = require('lru-cache')
-const highlight = require('./lib/highlight')
 const { PLUGINS, REQUIRED_PLUGINS } = require('./lib/constant')
-const highlightLinesPlugin = require('./lib/highlightLines')
-const preWrapperPlugin = require('./lib/preWrapper')
-const lineNumbersPlugin = require('./lib/lineNumbers')
 const componentPlugin = require('./lib/component')
 const hoistScriptStylePlugin = require('./lib/hoist')
 const convertRouterLinkPlugin = require('./lib/link')
@@ -34,7 +30,6 @@ module.exports = (markdown = {}) => {
     anchor,
     toc,
     plugins,
-    lineNumbers,
     beforeInstantiate,
     afterInstantiate
   } = markdown
@@ -50,19 +45,10 @@ module.exports = (markdown = {}) => {
   config
     .options
       .html(true)
-      .highlight(highlight)
       .end()
 
     .plugin(PLUGINS.COMPONENT)
       .use(componentPlugin)
-      .end()
-
-    .plugin(PLUGINS.HIGHLIGHT_LINES)
-      .use(highlightLinesPlugin)
-      .end()
-
-    .plugin(PLUGINS.PRE_WRAPPER)
-      .use(preWrapperPlugin)
       .end()
 
     .plugin(PLUGINS.SNIPPET)
@@ -96,12 +82,6 @@ module.exports = (markdown = {}) => {
     .plugin(PLUGINS.TOC)
       .use(tocPlugin, [toc])
       .end()
-
-  if (lineNumbers) {
-    config
-      .plugin(PLUGINS.LINE_NUMBERS)
-        .use(lineNumbersPlugin)
-  }
 
   beforeInstantiate && beforeInstantiate(config)
 

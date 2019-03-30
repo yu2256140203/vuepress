@@ -9,7 +9,12 @@ function wrap (code, lang) {
   if (lang === 'text') {
     code = escapeHtml(code)
   }
-  return `<pre v-pre class="language-${lang}"><code>${code}</code></pre>`
+  return `<div class="code-block">`
+    + (lang === 'text' ? '' : `<div class="language-name">${escapeHtml(lang)}</div>`)
+    + `<!--before-->`
+    + `<pre v-pre><code>${code}</code></pre>`
+    + `<!--after-->`
+    + `</div>`
 }
 
 module.exports = (str, lang) => {

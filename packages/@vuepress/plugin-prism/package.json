@@ -1,0 +1,8 @@
+{
+  "name": "vuepress-plugin-prism",
+  "version": "0.0.1",
+  "main": "index.js",
+  "dependencies": {
+    "prismjs": "^1.16.0"
+  }
+}
