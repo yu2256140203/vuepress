@@ -24,6 +24,18 @@ module.exports = (options, ctx) => ({
     ['@vuepress/container', { type: 'tip' }],
     ['@vuepress/container', { type: 'warning' }],
     ['@vuepress/container', { type: 'danger' }],
-    'prism'
+    ['prism', {
+      theme: 'tomorrow',
+      preview: {
+        '/': {
+          beforeCodeBlock: '<p><strong>Input</strong></p>\n',
+          beforePreview: '<p><strong>Output</strong></p>\n'
+        },
+        '/zh/': {
+          beforeCodeBlock: '<p><strong>输入</strong></p>\n',
+          beforePreview: '<p><strong>输出</strong></p>\n'
+        }
+      }
+    }]
   ]
 })

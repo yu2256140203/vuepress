@@ -69,35 +69,19 @@ For more details, check out the [Front Matter](./frontmatter.md) page.
 
 ## GitHub-Style Tables
 
-**Input**
-
-```
+``` md preview
 | Tables        | Are           | Cool  |
 | ------------- |:-------------:| -----:|
 | col 3 is      | right-aligned | $1600 |
 | col 2 is      | centered      |   $12 |
 | zebra stripes | are neat      |    $1 |
 ```
-
-**Output**
-
-| Tables        | Are           | Cool  |
-| ------------- |:-------------:| -----:|
-| col 3 is      | right-aligned | $1600 |
-| col 2 is      | centered      |   $12 |
-| zebra stripes | are neat      |    $1 |
 
 ## Emoji :tada:
 
-**Input**
-
-```
+``` md preview
 :tada: :100:
 ```
-
-**Output**
-
-:tada: :100:
 
 A list of all emojis available can be found [here](https://github.com/markdown-it/markdown-it-emoji/blob/master/lib/data/full.json).
 
@@ -123,9 +107,7 @@ Rendering of TOC can be configured using the [`markdown.toc`](../config/README.m
 
 ## Custom Containers <Badge text="default theme"/>
 
-**Input**
-
-```
+``` md preview
 ::: tip
 This is a tip
 :::
@@ -138,32 +120,14 @@ This is a warning
 This is a dangerous warning
 :::
 ```
-
-**Output**
-
-::: tip
-This is a tip
-:::
-
-::: warning
-This is a warning
-:::
-
-::: danger
-This is a dangerous warning
-:::
 
 You can also customize the title of the block:
 
-```
+``` md preview
 ::: danger STOP
 Danger zone, do not proceed
 :::
 ```
-
-::: danger STOP
-Danger zone, do not proceed
-:::
 
 **Also see:**
 
@@ -173,9 +137,7 @@ Danger zone, do not proceed
 
 VuePress uses [Prism](https://prismjs.com/) to highlight language syntax in markdown code blocks, using coloured text. Prism supports a wide variety of programming languages. All you need to do is append a valid language alias to the beginning backticks for the code block:
 
-**Input**
-
-````
+```` md preview
 ``` js
 export default {
   name: 'MyComponent',
@@ -184,18 +146,7 @@ export default {
 ```
 ````
 
-**Output**
-
-``` js
-export default {
-  name: 'MyComponent',
-  // ...
-}
-```
-
-**Input**
-
-````
+```` md preview
 ``` html
 <ul>
   <li
@@ -207,27 +158,12 @@ export default {
 </ul>
 ```
 ````
-
-**Output**
-
-``` html
-<ul>
-  <li
-    v-for="todo in todos"
-    :key="todo.id"
-  >
-    {{ todo.text }}
-  </li>
-</ul>
-```
 
 Check out [the list of valid languages](https://prismjs.com/#languages-list) on the Prism website.
 
 ## Line Highlighting in Code Blocks
 
-**Input**
-
-````
+```` md preview
 ``` js{4}
 export default {
   data () {
@@ -238,18 +174,6 @@ export default {
 }
 ```
 ````
-
-**Output**
-
-``` js{4}
-export default {
-  data () {
-    return {
-      msg: 'Highlighted!'
-    }
-  }
-}
-```
 
 ## Line Numbers
 
@@ -263,37 +187,27 @@ module.exports = {
 }
 ```
 
-<!-- TODO Support line numbers for specific fence block -->
+or you can enable/disable line numbers in the frontmatter:
 
-- Demo:
+``` yaml
+---
+lineNumbers: true
+---
+```
 
-<picture>
-  <source srcset="/line-numbers-desktop.png" media="(min-width: 719px)">
-  <img src="/line-numbers-desktop.png" class="line-numbers-desktop-snap" alt="Image">
-</picture>
+or you can directly enable/disable line numbers in the code block:
 
-<picture>
-  <source srcset="/line-numbers-mobile.gif" media="(max-width: 719px)">
-  <img src="/line-numbers-mobile.gif" class="line-numbers-mobile-snap" alt="Image">
-</picture>
-
-<style>
-  @media screen and (min-width:  719px) {
-    .line-numbers-mobile-snap {
-       display: none;
+```` md preview
+``` js {4} line-numbers
+export default {
+  data () {
+    return {
+      msg: 'Highlighted!'
     }
   }
-  @media screen and (max-width:  719px) {
-    .line-numbers-desktop-snap {
-       display: none;
-    }
-    .line-numbers-mobile-snap {
-      max-width: none!important;
-      margin: 0 -1.5rem;
-      width: 100vw;
-    }
-  }
-</style>
+}
+```
+````
 
 ## Import Code Snippets <Badge text="beta" type="warn"/>
 
@@ -305,19 +219,9 @@ You can import code snippets from existing files via following syntax:
 
 It also supports [line highlighting](#line-highlighting-in-code-blocks):
 
-``` md
-<<< @/filepath{highlightLines}
-```
-
-**Input**
-
-``` md
+``` md preview
 <<< @/../@vuepress/markdown/__tests__/fragments/snippet.js{2}
 ```
-
-**Output**
-
-<<< @/../@vuepress/markdown/__tests__/fragments/snippet.js{2}
 
 ::: tip
 Since the import of the code snippets will be executed before webpack compilation, you can't use the path alias in webpack. The default value of `@` is `process.cwd()`.

@@ -69,35 +69,19 @@ lang: en-US
 
 ## GitHub 风格的表格
 
-**输入**
-
-```
+``` md preview
 | Tables        | Are           | Cool  |
 | ------------- |:-------------:| -----:|
 | col 3 is      | right-aligned | $1600 |
 | col 2 is      | centered      |   $12 |
 | zebra stripes | are neat      |    $1 |
 ```
-
-**输出**
-
-| Tables        | Are           | Cool  |
-| ------------- |:-------------:| -----:|
-| col 3 is      | right-aligned | $1600 |
-| col 2 is      | centered      |   $12 |
-| zebra stripes | are neat      |    $1 |
 
 ## Emoji
 
-**输入**
-
-```
+``` md preview
 :tada: :100:
 ```
-
-**输出**
-
-:tada: :100:
 
 ## 目录
 
@@ -121,9 +105,7 @@ lang: en-US
 
 ## 自定义容器 <Badge text="默认主题"/>
 
-**输入**
-
-```
+``` md preview
 ::: tip
 This is a tip
 :::
@@ -137,31 +119,13 @@ This is a dangerous warning
 :::
 ```
 
-**输出**
-
-::: tip
-This is a tip
-:::
-
-::: warning
-This is a warning
-:::
-
-::: danger
-This is a dangerous thing
-:::
-
 你也可以自定义块中的标题：
 
-```
+``` md preview
 ::: danger STOP
 Danger zone, do not proceed
 :::
 ```
-
-::: danger STOP
-Danger zone, do not proceed
-:::
 
 **参考:**
 
@@ -171,9 +135,7 @@ Danger zone, do not proceed
 
 VuePress 使用了 [Prism](https://prismjs.com/) 来为 markdown 中的代码块实现语法高亮。Prism 支持大量的编程语言，你需要做的只是在代码块的开始倒勾中附加一个有效的语言别名：
 
-**输入**
-
-````
+```` md preview
 ``` js
 export default {
   name: 'MyComponent',
@@ -182,18 +144,7 @@ export default {
 ```
 ````
 
-**输出**
-
-``` js
-export default {
-  name: 'MyComponent',
-  // ...
-}
-```
-
-**输入**
-
-````
+```` md preview
 ``` html
 <ul>
   <li
@@ -205,28 +156,12 @@ export default {
 </ul>
 ```
 ````
-
-**输出**
-
-``` html
-<ul>
-  <li
-    v-for="todo in todos"
-    :key="todo.id"
-  >
-    {{ todo.text }}
-  </li>
-</ul>
-```
 
 在 Prism 的网站上查看 [合法的语言列表](https://prismjs.com/#languages-list)。
 
-
 ## 代码块中的行高亮
 
-**输入**
-
-````
+```` md preview
 ``` js {4}
 export default {
   data () {
@@ -237,18 +172,6 @@ export default {
 }
 ```
 ````
-
-**输出**
-
-``` js{4}
-export default {
-  data () {
-    return {
-      msg: 'Highlighted!'
-    }
-  }
-}
-```
 
 ## 行号
 
@@ -262,37 +185,27 @@ module.exports = {
 }  
 ```
 
-<!-- TODO Support line numbers for specific fence block -->
+或者你也可以在 frontmatter 中启用/禁用行号：
 
-- 示例:
+``` yaml
+---
+lineNumbers: true
+---
+```
 
-<picture>
-  <source srcset="/line-numbers-desktop.png" media="(min-width: 719px)">
-  <img class="line-numbers-desktop-snap" alt="Image">
-</picture>
+或者你也可以在代码块前启用/禁用行号：
 
-<picture>
-  <source srcset="/line-numbers-mobile.gif" media="(max-width: 719px)">
-  <img class="line-numbers-mobile-snap" alt="Image">
-</picture>
-
-<style>
-  @media screen and (min-width:  719px) {
-    .line-numbers-mobile-snap {
-       display: none;
+```` md preview
+``` js {3,5-7} line-numbers
+export default {
+  data () {
+    return {
+      msg: 'Highlighted!'
     }
   }
-  @media screen and (max-width:  719px) {
-    .line-numbers-desktop-snap {
-       display: none;
-    }
-    .line-numbers-mobile-snap {
-      max-width: none!important;
-      margin: 0 -1.5rem;
-      width: 100vw;
-    }
-  }
-</style>
+}
+```
+````
 
 ## 导入代码段 <Badge text="beta" type="warn"/>
 
@@ -304,19 +217,9 @@ module.exports = {
 
 它也支持 [行高亮](#代码块中的行高亮)：
 
-``` md
-<<< @/filepath{highlightLines} 
-```
-
-**输入**
-
-```
+``` md preview
 <<< @/../@vuepress/markdown/__tests__/fragments/snippet.js{2}
 ```
-
-**输出**
-
-<<< @/../@vuepress/markdown/__tests__/fragments/snippet.js{2}
 
 ::: tip 注意
 由于代码段的导入将在 webpack 编译之前执行，因此你无法使用 webpack 中的路径别名，此处的 `@` 默认值是 `process.cwd()`。

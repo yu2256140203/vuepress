@@ -7,7 +7,7 @@ $lineNumbersWrapperWidth ?= 3.5rem
 
 .content div.code-block
   position relative
-  line-height 1.4rem
+  line-height 1.4
   border-radius 6px
   background-color $codeBgColor
 
@@ -33,13 +33,14 @@ $lineNumbersWrapperWidth ?= 3.5rem
       border-radius 0
 
   .highlight-lines, .line-numbers
+    padding 1.25rem 0
+    font-size 0.85em
     user-select none
     position absolute
-    padding 1.25rem 0
     left 0
 
   .highlight-lines
-    font-size 0.85em
+    line-height 1.4rem
     width 100%
     .highlighted
       z-index 1
@@ -47,7 +48,7 @@ $lineNumbersWrapperWidth ?= 3.5rem
       background-color $highlightLinesBgColor
 
   .line-numbers
-    font-size 0.85em
+    line-height 1.3rem
     text-align center
     z-index 3
     color $lineNumbersColor

@@ -22,7 +22,7 @@ module.exports = (md) => {
       ? options.highlight(token.content, token.info)
       : token.content
 
-    const highlightLinesCode = code.split('\n').map((split, index) => {
+    const highlightLinesCode = code.split('\n').slice(1).map((split, index) => {
       const lineNumber = index + 1
       const inRange = token.lineNumbers.some(([start, end]) => {
         if (start && end) {

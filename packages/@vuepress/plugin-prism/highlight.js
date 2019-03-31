@@ -40,8 +40,6 @@ module.exports = (options) => {
       try {
         loadLanguages([lang])
       } catch (e) {
-        console.log(chalk.yellow(`[vuepress] Syntax highlight for language "${lang}" is not supported.`))
-        process.exit(1)
         logger.warn(chalk.yellow(`[vuepress] Syntax highlight for language "${lang}" is not supported.`))
       }
     }

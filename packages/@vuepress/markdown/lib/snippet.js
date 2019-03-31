@@ -1,10 +1,9 @@
 const { fs, path } = require('@vuepress/shared-utils')
 
 module.exports = function snippet (md, options = {}) {
-  const fence = md.renderer.rules.fence
   const root = options.root || process.cwd()
 
-  md.renderer.rules.fence = (...args) => {
+  md.renderer.rules.code_snippet = (...args) => {
     const [tokens, idx, , { loader }] = args
     const token = tokens[idx]
     const { src } = token
@@ -19,7 +18,7 @@ module.exports = function snippet (md, options = {}) {
         token.info = ''
       }
     }
-    return fence(...args)
+    return md.renderer.rules.fence(...args)
   }
 
   function parser (state, startLine, endLine, silent) {
@@ -49,7 +48,7 @@ module.exports = function snippet (md, options = {}) {
 
     state.line = startLine + 1
 
-    const token = state.push('fence', 'code', 0)
+    const token = state.push('code_snippet', 'code', 0)
     token.info = filename.split('.').pop() + meta
     token.src = path.resolve(filename)
     token.markup = '```'
