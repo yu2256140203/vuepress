@@ -5,13 +5,16 @@ module.exports = (options, context) => ({
 
   chainMarkdown (md) {
     md.options
-      .highlight(require('./highlight'))
+      .highlight(require('./highlight')(options))
 
     md.plugin('highlight-lines')
-      .use(require('./highlightLines'))
+      .use(require('./highlightLines'), [options])
 
     md.plugin('line-numbers')
-      .use(require('./lineNumbers'), options)
+      .use(require('./lineNumbers'), [options])
+
+    md.plugin('code-preview')
+      .use(require('./codePreview'), [options.preview])
   },
 
   enhanceAppFiles () {
