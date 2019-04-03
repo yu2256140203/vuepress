@@ -1,10 +1,10 @@
-jest.mock('vuepress-plugin-a')
-jest.mock('@org/vuepress-plugin-a')
-jest.mock('@vuepress/plugin-a')
+jest.mock('vuepress-plugin-mocked-a')
+jest.mock('@org/vuepress-plugin-mocked-a')
+jest.mock('@vuepress/plugin-mocked-a')
 
-jest.mock('vuepress-theme-a')
-jest.mock('@org/vuepress-theme-a')
-jest.mock('@vuepress/theme-a')
+jest.mock('vuepress-theme-mocked-a')
+jest.mock('@org/vuepress-theme-mocked-a')
+jest.mock('@vuepress/theme-mocked-a')
 
 import path from 'path'
 import {
@@ -39,25 +39,25 @@ afterAll(() => {
 
 describe('resolveScopePackage', () => {
   test('corrent format', () => {
-    const pkg = resolveScopePackage('@vuepress/plugin-a')
+    const pkg = resolveScopePackage('@vuepress/plugin-mocked-a')
     expect(pkg.org).toBe('vuepress')
-    expect(pkg.name).toBe('plugin-a')
+    expect(pkg.name).toBe('plugin-mocked-a')
   })
 
   test('incorrect format', () => {
-    const pkg2 = resolveScopePackage('vuepress/plugin-a')
+    const pkg2 = resolveScopePackage('vuepress/plugin-mocked-a')
     expect(pkg2).toEqual({ "name": "", "org": "" })
 
-    const pkg3 = resolveScopePackage('vuepress-plugin-a')
+    const pkg3 = resolveScopePackage('vuepress-plugin-mocked-a')
     expect(pkg3).toEqual({ "name": "", "org": "" })
   })
 })
 
-const getBaseAsserts = (type: string) => [
-  { input: 'a', output: ['a', `vuepress-${type}-a`] },
-  { input: `vuepress-${type}-a`, output: ['a', `vuepress-${type}-a`] },
-  { input: '@vuepress/a', output: ['@vuepress/a', `@vuepress/${type}-a`] },
-  { input: '@org/a', output: ['@org/a', `@org/vuepress-${type}-a`] }
+const getBaseAsserts = (type: string, name = 'mocked-a') => [
+  { input: name, output: [name, `vuepress-${type}-${name}`] },
+  { input: `vuepress-${type}-${name}`, output: [name, `vuepress-${type}-${name}`] },
+  { input: `@vuepress/${name}`, output: [`@vuepress/${name}`, `@vuepress/${type}-${name}`] },
+  { input: `@org/${name}`, output: [`@org/${name}`, `@org/vuepress-${type}-${name}`] }
 ]
 
 describe('normalizeRequest', () => {
