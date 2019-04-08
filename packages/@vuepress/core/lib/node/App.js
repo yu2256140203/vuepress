@@ -41,6 +41,9 @@ module.exports = class App {
     this.options = options
     this.sourceDir = this.options.sourceDir || path.join(__dirname, 'docs.fallback')
     logger.debug('sourceDir', this.sourceDir)
+    if (!fs.existsSync(this.sourceDir)) {
+      logger.warn(`Source directory doesn't exist: ${chalk.yellow(this.sourceDir)}`)
+    }
 
     const { tempPath, writeTemp } = createTemp(options.temp)
     this.tempPath = tempPath
@@ -149,12 +152,12 @@ module.exports = class App {
       .use(require('./internal-plugins/transformModule'))
       .use(require('./internal-plugins/dataBlock'))
       .use(require('./internal-plugins/frontmatterBlock'))
-      .use('@vuepress/container', {
+      .use('container', {
         type: 'slot',
         before: info => `<template slot="${info}">`,
         after: '</template>'
       })
-      .use('@vuepress/container', {
+      .use('container', {
         type: 'v-pre',
         before: '<div v-pre>',
         after: '</div>'

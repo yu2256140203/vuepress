@@ -131,7 +131,7 @@ Danger zone, do not proceed
 
 **Also see:**
 
-- [@vuepress/plugin-container](../plugin/official/plugin-container.md)
+- [vuepress-plugin-container](https://vuepress.github.io/plugins/container/)
 
 ## Syntax Highlighting in Code Blocks
 
