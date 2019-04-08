@@ -131,7 +131,7 @@ Danger zone, do not proceed
 
 - [vuepress-plugin-container](https://vuepress.github.io/plugins/container/)
 
-## 代码块中的语法高亮
+## 代码块中的语法高亮 <Badge text="默认主题"/>
 
 VuePress 使用了 [Prism](https://prismjs.com/) 来为 markdown 中的代码块实现语法高亮。Prism 支持大量的编程语言，你需要做的只是在代码块的开始倒勾中附加一个有效的语言别名：
 
@@ -159,7 +159,7 @@ export default {
 
 在 Prism 的网站上查看 [合法的语言列表](https://prismjs.com/#languages-list)。
 
-## 代码块中的行高亮
+## 代码块中的行高亮 <Badge text="默认主题"/>
 
 ```` md preview
 ``` js {4}
@@ -173,7 +173,7 @@ export default {
 ```
 ````
 
-## 行号
+## 行号 <Badge text="默认主题"/>
 
 你可以通过配置来为每个代码块显示行号：
 
@@ -207,7 +207,7 @@ export default {
 ```
 ````
 
-## 导入代码段 <Badge text="beta" type="warn"/>
+## 导入代码段 <Badge text="默认主题"/> <Badge text="beta" type="warn"/>
 
 你可以通过下述的语法导入已经存在的文件中的代码段：
 

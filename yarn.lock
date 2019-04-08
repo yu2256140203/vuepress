@@ -10097,6 +10097,18 @@ vuepress-plugin-flowchart@^1.4.2:
   dependencies:
     flowchart.js "^1.11.3"
 
+vuepress-plugin-import-code@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/vuepress-plugin-import-code/-/vuepress-plugin-import-code-0.1.0.tgz#b9a144e70999c10e3d1f2b6ca8308efad336ac99"
+  integrity sha512-Fa5fvDdbhRnwyqfGLZ6O2wG0GMq4EHYo92sAX9YFjqj6xbqkE0wc+FuCqLp3QO06Xto2KpqFUarLufHPnNOErA==
+
+vuepress-plugin-prism@^1.0.0-alpha.0:
+  version "1.0.0-alpha.0"
+  resolved "https://registry.yarnpkg.com/vuepress-plugin-prism/-/vuepress-plugin-prism-1.0.0-alpha.0.tgz#8fb35ebf0821c632c1cdccb91581d07e1d4eb046"
+  integrity sha512-xBexBpDRR14K7zt05ZHRJm43er31Vad+Za09pIm07sYyUSOWIxLM3v44SIxLk7fQi3bPB+0B3nbLCdx92IR3WA==
+  dependencies:
+    prismjs "^1.16.0"
+
 w3c-hr-time@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/w3c-hr-time/-/w3c-hr-time-1.0.1.tgz#82ac2bff63d950ea9e3189a58a65625fedf19045"

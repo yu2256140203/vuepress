@@ -133,7 +133,7 @@ Danger zone, do not proceed
 
 - [vuepress-plugin-container](https://vuepress.github.io/plugins/container/)
 
-## Syntax Highlighting in Code Blocks
+## Syntax Highlighting in Code Blocks <Badge text="default theme"/>
 
 VuePress uses [Prism](https://prismjs.com/) to highlight language syntax in markdown code blocks, using coloured text. Prism supports a wide variety of programming languages. All you need to do is append a valid language alias to the beginning backticks for the code block:
 
@@ -161,7 +161,7 @@ export default {
 
 Check out [the list of valid languages](https://prismjs.com/#languages-list) on the Prism website.
 
-## Line Highlighting in Code Blocks
+## Line Highlighting in Code Blocks <Badge text="default theme"/>
 
 ```` md preview
 ``` js{4}
@@ -175,7 +175,7 @@ export default {
 ```
 ````
 
-## Line Numbers
+## Line Numbers <Badge text="default theme"/>
 
 You can enable line numbers for each code blocks via config:
 
@@ -209,7 +209,7 @@ export default {
 ```
 ````
 
-## Import Code Snippets <Badge text="beta" type="warn"/>
+## Import Code Snippets <Badge text="default theme"/> <Badge text="beta" type="warn"/>
 
 You can import code snippets from existing files via following syntax:
 
