@@ -1,7 +1,0 @@
-{
-  "name": "vuepress-plugin-import-code",
-  "version": "0.0.1",
-  "main": "index.js",
-  "dependencies": {
-  }
-}
