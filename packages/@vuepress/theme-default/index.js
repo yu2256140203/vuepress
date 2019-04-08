@@ -51,6 +51,7 @@ module.exports = (options, ctx) => ({
           beforePreview: '<p><strong>输出</strong></p>\n'
         }
       }
-    }]
+    }],
+    ['import-code']
   ]
 })

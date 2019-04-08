@@ -1,6 +1,5 @@
 exports.PLUGINS = {
   COMPONENT: 'component',
-  SNIPPET: 'snippet',
   CONVERT_ROUTER_LINK: 'convert-router-link',
   HOIST_SCRIPT_STYLE: 'hoist-script-style',
   ANCHOR: 'anchor',

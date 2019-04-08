@@ -10,7 +10,6 @@ const { PLUGINS, REQUIRED_PLUGINS } = require('./lib/constant')
 const componentPlugin = require('./lib/component')
 const hoistScriptStylePlugin = require('./lib/hoist')
 const convertRouterLinkPlugin = require('./lib/link')
-const snippetPlugin = require('./lib/snippet')
 const tocPlugin = require('./lib/tableOfContents')
 const emojiPlugin = require('markdown-it-emoji')
 const anchorPlugin = require('markdown-it-anchor')
@@ -49,10 +48,6 @@ module.exports = (markdown = {}) => {
 
     .plugin(PLUGINS.COMPONENT)
       .use(componentPlugin)
-      .end()
-
-    .plugin(PLUGINS.SNIPPET)
-      .use(snippetPlugin)
       .end()
 
     .plugin(PLUGINS.CONVERT_ROUTER_LINK)
